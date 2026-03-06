@@ -91,3 +91,14 @@ if (password === "1234") {
         document.getElementById("homePage").style.display = "flex"; 
     }, 2000);
 }
+// Chặn chuột phải
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Chặn các phím tắt soi code (F12, Ctrl+U, Ctrl+Shift+I)
+document.onkeydown = function(e) {
+    if (e.keyCode == 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
+        (e.ctrlKey && e.keyCode == 85)) {
+        return false;
+    }
+};
