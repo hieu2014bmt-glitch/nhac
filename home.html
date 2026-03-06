@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Gửi Người Đẹp 8/3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> 
+
+<style>
+body{
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-family:'Quicksand',sans-serif;
+    margin:0;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+    width:100%;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:absolute;
+    top:0;
+    left:0;
+    animation:fadeIn 0.6s;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:scale(0.95);}
+    to{opacity:1;transform:scale(1);}
+}
+
+.box{
+    background:rgba(255,255,255,0.92);
+    padding:40px;
+    border-radius:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+    max-width:600px;
+    width:90%;
+}
+
+h2,h3{color:#d63384;font-weight:700;}
+
+.menu-btn{
+    width:150px;
+    margin:10px;
+    border-radius:50px;
+    font-weight:600;
+}
+
+.back-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:white;
+    border:none;
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.letter-paper{
+    background:#fffaf0;
+    padding:30px;
+    border-radius:15px;
+    border-left:5px solid #ff1493;
+    font-family:'Dancing Script',cursive;
+    font-size:24px;
+    text-align:left;
+}
+
+.fall-img{
+    position:fixed;
+    top:-150px;
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid white;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="introPage" class="page" style="display:flex;">
+    <div class="box">
+        <h2>💖 Chào mừng người đẹp 💖</h2>
+        <p>Nhấn vào nút bên dưới để nhận món quà bí mật nha!</p>
+        <button class="btn btn-danger mt-3 px-4 py-2" onclick="goTo('menuPage')">Mở quà 💕</button>
+    </div>
+</div>
+
+<!-- MENU -->
+<div id="menuPage" class="page">
+    <div class="box">
+        <h3>✨ Dành cho mọi người ✨</h3>
+        <div class="d-flex justify-content-center flex-wrap">
+            <button class="btn btn-outline-primary menu-btn" onclick="goTo('letterPage')">💌 Thư tay</button>
+            <button class="btn btn-outline-success menu-btn" onclick="goTo('galleryPage')">🖼 Ảnh kỉ niệm</button>
+            <button class="btn btn-outline-warning menu-btn" onclick="goTo('flowerPage')">🌸 Tặng hoa</button>
+        </div>
+    </div>
+</div>
+
+<!-- LETTER PAGE -->
+<div id="letterPage" class="page">
+    <button class="back-btn" onclick="goTo('menuPage')">←</button>
+    <div class="box">
+        <div class="letter-paper">
+            <h4>Gửi những bông hoa xinh đẹp nhất 💌</h4>
+            <p id="typedText"></p>
+        </div>
+    </div>
+</div>
+
+<!-- GALLERY PAGE -->
+<div id="galleryPage" class="page">
+    <button class="back-btn" onclick="goTo('menuPage')">←</button>
+    <div class="box">
+        <h4>Khoảnh khắc kỉ niệm 💖</h4>
+        <p style="font-size:18px; margin-top:15px;">
+            Xin lỗi mọi người nha 🥺<br>
+            Vì hiện tại mình chưa có ảnh nào để đăng lên :)))<br>
+            Khi nào có ảnh đẹp mình sẽ cập nhật sau nhé 💕
+        </p>
+    </div>
+</div>
+
+<!-- FLOWER PAGE -->
+<div id="flowerPage" class="page">
+    <button class="back-btn" onclick="goTo('menuPage')">←</button>
+    <iframe src="flower.html"
+        style="width:100%;height:100vh;border:none;position:absolute;top:0;left:0;">
+    </iframe>
+</div>
+
+<script>
+
+const letterContent="Nhân ngày Quốc tế Phụ nữ 8/3, xin gửi lời chúc tốt đẹp nhất đến tất cả chị em. Chúc mọi người luôn xinh đẹp, thành công và hạnh phúc trong cuộc sống 💕";
+
+function goTo(pageId){
+    document.querySelectorAll('.page').forEach(p=>p.style.display="none");
+    document.getElementById(pageId).style.display="flex";
+
+    if(pageId==="letterPage") typeWriter();
+}
+
+function typeWriter(){
+    let i=0;
+    const text=document.getElementById("typedText");
+    text.innerHTML="";
+    const typing=setInterval(()=>{
+        if(i<letterContent.length){
+            text.innerHTML+=letterContent.charAt(i);
+            i++;
+        }else clearInterval(typing);
+    },40);
+}
+
+</script>
+
+</body>
+</html>

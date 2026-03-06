@@ -1,0 +1,132 @@
+body {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s ease;
+    margin: 0;
+}
+
+/* Loading Box */
+.loading-box {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.loading-box.show {
+    display: flex;
+}
+
+.loading-box h3 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    animation: slideDown 0.4s ease;
+}
+
+.loading-box button {
+    animation: bounceIn 0.5s ease;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-size: 1.2rem;
+}
+
+.loading-box button:hover {
+    transform: scale(1.1);
+    background-color: #fff !important;
+}
+
+/* Hoa rơi */
+.flower {
+    position: absolute;
+    top: -50px;
+    font-size: 24px;
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 1;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+/* Animations */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Input styling */
+input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    color: black;
+    font-size: 18px;
+    letter-spacing: 5px; /* Tạo khoảng cách giữa các số */
+}
+
+/* Button styling */
+.btn {
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
