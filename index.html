@@ -22,60 +22,99 @@
             justify-content: center; align-items: center; flex-direction: column;
             position: absolute; top: 0; left: 0; animation: fadeIn 0.6s;
         }
-        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        @keyframes fadeIn { from{opacity:0; transform: scale(0.95);} to{opacity:1; transform: scale(1);} }
+        
         .box {
             background: rgba(255,255,255,0.92); padding: 30px;
             border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             max-width: 500px; width: 90%; text-align: center;
         }
-        /* Style cho trang Password */
-        #passwordPage { display: flex; } 
-        .pass-btn-group button { font-weight: bold; font-size: 1.1rem; }
+
+        .letter-paper {
+            background: #fffaf0; padding: 25px; border-radius: 15px;
+            border-left: 5px solid #ff1493; font-family: 'Dancing Script', cursive;
+            font-size: 22px; text-align: left;
+        }
+
+        .back-btn {
+            position: absolute; top: 20px; left: 20px;
+            background: white; border: none; border-radius: 50%;
+            width: 40px; height: 40px; shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
 
-<audio id="audioChill" loop><source src="assets/Nhacpage1.mp3" type="audio/mpeg"></audio>
-<audio id="audioMain" loop><source src="assets/NhacPage2.mp3" type="audio/mpeg"></audio>
+    <audio id="audioChill" loop><source src="assets/Nhacpage1.mp3" type="audio/mpeg"></audio>
+    <audio id="audioMain" loop><source src="assets/NhacPage2.mp3" type="audio/mpeg"></audio>
 
     <div id="loadingBox" class="loading-box"></div>
 
-    <div id="passwordPage" class="page">
+    <div id="passwordPage" class="page" style="display: flex;">
         <div class="d-flex align-items-center flex-column flex-md-row" style="gap: 50px;">
             <img src="./img/Backgorund.png" class="rounded-circle shadow" width="150" height="150" style="object-fit: cover; border: 4px solid #fff;">
             <div class="card shadow-lg p-4 text-center" style="width: 320px; border-radius: 20px; border: none; background: #fff;">
                 <h5 class="mb-3 fw-bold text-danger">Nhập Pass đi người đẹp 💕</h5>
                 <input type="password" id="passwordDisplay" class="form-control mb-3 text-center fw-bold" placeholder="****" readonly>
                 <div class="d-grid gap-2 pass-btn-group">
-                    <div class="btn-group w-100 mb-1"><button onclick="addNumber('1')" class="btn btn-outline-danger">1</button><button onclick="addNumber('2')" class="btn btn-outline-danger">2</button><button onclick="addNumber('3')" class="btn btn-outline-danger">3</button></div>
-                    <div class="btn-group w-100 mb-1"><button onclick="addNumber('4')" class="btn btn-outline-danger">4</button><button onclick="addNumber('5')" class="btn btn-outline-danger">5</button><button onclick="addNumber('6')" class="btn btn-outline-danger">6</button></div>
-                    <div class="btn-group w-100 mb-1"><button onclick="addNumber('7')" class="btn btn-outline-danger">7</button><button onclick="addNumber('8')" class="btn btn-outline-danger">8</button><button onclick="addNumber('9')" class="btn btn-outline-danger">9</button></div>
-                    <div class="btn-group w-100"><button onclick="clearPass()" class="btn btn-secondary">Xóa</button><button onclick="addNumber('0')" class="btn btn-outline-danger">0</button><button onclick="checkPassword()" class="btn btn-success">✔</button></div>
+                    <div class="btn-group w-100 mb-1">
+                        <button onclick="addNumber('1')" class="btn btn-outline-danger">1</button>
+                        <button onclick="addNumber('2')" class="btn btn-outline-danger">2</button>
+                        <button onclick="addNumber('3')" class="btn btn-outline-danger">3</button>
+                    </div>
+                    <div class="btn-group w-100 mb-1">
+                        <button onclick="addNumber('4')" class="btn btn-outline-danger">4</button>
+                        <button onclick="addNumber('5')" class="btn btn-outline-danger">5</button>
+                        <button onclick="addNumber('6')" class="btn btn-outline-danger">6</button>
+                    </div>
+                    <div class="btn-group w-100 mb-1">
+                        <button onclick="addNumber('7')" class="btn btn-outline-danger">7</button>
+                        <button onclick="addNumber('8')" class="btn btn-outline-danger">8</button>
+                        <button onclick="addNumber('9')" class="btn btn-outline-danger">9</button>
+                    </div>
+                    <div class="btn-group w-100">
+                        <button onclick="clearPass()" class="btn btn-secondary">Xóa</button>
+                        <button onclick="addNumber('0')" class="btn btn-outline-danger">0</button>
+                        <button onclick="checkPassword()" class="btn btn-success">✔</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="introPage" class="page">
-        <div class="box">
-            <h2>💖 Chào mừng người đẹp 💖</h2>
-            <p>Mật khẩu chính xác! Nhấn để nhận quà nha.</p>
-            <button class="btn btn-danger mt-3 px-4 py-2" onclick="goTo('menuPage')">Mở quà 💕</button>
-        </div>
-    </div>
-
-    <div id="menuPage" class="page">
+    <div id="homePage" class="page">
         <div class="box">
             <h3>✨ Dành cho mọi người ✨</h3>
             <div class="d-flex justify-content-center flex-wrap">
-                <button class="btn btn-outline-primary m-2" onclick="goTo('letterPage')">💌 Thư tay</button>
-                <button class="btn btn-outline-success m-2" onclick="goTo('galleryPage')">🖼 Ảnh kỉ niệm</button>
-                <button class="btn btn-outline-warning m-2" onclick="goTo('flowerPage')">🌸 Tặng hoa</button>
+                <button class="btn btn-outline-primary m-2" onclick="goToSection('letterPage')">💌 Thư tay</button>
+                <button class="btn btn-outline-success m-2" onclick="goToSection('galleryPage')">🖼 Ảnh kỉ niệm</button>
+                <button class="btn btn-outline-warning m-2" onclick="goToSection('flowerPage')">🌸 Tặng hoa</button>
             </div>
         </div>
     </div>
 
-   
+    <div id="letterPage" class="page">
+        <button class="back-btn" onclick="goToSection('homePage')">←</button>
+        <div class="box">
+            <div class="letter-paper">
+                <h4>Gửi những bông hoa xinh đẹp nhất 💌</h4>
+                <p id="typedText"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="galleryPage" class="page">
+        <button class="back-btn" onclick="goToSection('homePage')">←</button>
+        <div class="box">
+            <h4>Khoảnh khắc kỉ niệm 💖</h4>
+            <p>Hiện tại mình chưa có ảnh, sẽ cập nhật sau nhé 💕</p>
+        </div>
+    </div>
+
+    <div id="flowerPage" class="page">
+        <button class="back-btn" onclick="goToSection('homePage')">←</button>
+        <iframe src="flower.html" style="width:100%; height:100vh; border:none;"></iframe>
+    </div>
 
     <script src="./js/script.js"></script>
 </body>
